@@ -23,7 +23,7 @@ class LoginSauceDemo(unittest.TestCase):
     #     print(f"Test2:\n Current url: {self.driver.current_url}")
     #     assert self.driver.current_url == 'https://www.saucedemo.com/inventory.html'
 
-    def test_inventory(self):
+    def test_add_to_cart(self):
         login = system.page.LogInPage(self.driver)
         login.input_username()
         login.input_password()
@@ -36,6 +36,10 @@ class LoginSauceDemo(unittest.TestCase):
         inventorypage.add_to_cart_by_name("Sauce Labs Onesie")
         #inventorypage.add_to_cart_by_price("$7.99")
         inventorypage.check_cart_has_item()
+
+        inventorypage.click_cart_icon()       
+        assert self.driver.current_url == "https://www.saucedemo.com/cart.html"
+        print(self.driver.current_url)
 
 
     def tearDown(self):

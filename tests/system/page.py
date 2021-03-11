@@ -47,7 +47,7 @@ class InventoryPage(BasePage):
 			items = items.text
 
 			if product == items: 
-				print(f"Product found: {items}")
+				print(f"\nProduct found: {items}")
 				button = self.driver.find_element(*InventoryPageLocators.ADD_TO_CART_BUTTON)
 				print(f"I'm clicking: {button.text}")
 				if len(button.text) == 11:					
@@ -81,3 +81,9 @@ class InventoryPage(BasePage):
     			print('You have nothing in your cart.')
 		if cartWithItem != "":
 			print(f'You have {cartWithItem} items in your cart.')
+
+	def click_cart_icon(self):
+    	
+		cartButton = self.driver.find_element(*InventoryPageLocators.SHOPPING_CART)
+		cartButton.click()
+		
