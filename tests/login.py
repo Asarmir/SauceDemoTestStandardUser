@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 import unittest
 import system.page
+import time
 
 
 class LoginSauceDemo(unittest.TestCase):
@@ -23,23 +24,46 @@ class LoginSauceDemo(unittest.TestCase):
     #     print(f"Test2:\n Current url: {self.driver.current_url}")
     #     assert self.driver.current_url == 'https://www.saucedemo.com/inventory.html'
 
-    def test_add_to_cart(self):
+    # def test_add_to_cart(self):
+    #     # Rewrote login to remove all the prints and assert
+    #     login = system.page.LogInPage(self.driver)
+    #     login.input_username()
+    #     login.input_password()
+    #     login.login_button()
+        
+    #     #Checks gets the page and product by name
+    #     inventorypage = system.page.InventoryPage(self.driver)
+    #     inventorypage.add_to_cart_by_name("Sauce Labs Backpack")
+
+    #     inventorypage.add_to_cart_by_name("Sauce Labs Onesie")
+    #     # Checks if you have items in cart and returns how many.
+    #     inventorypage.check_cart_has_item()
+
+    #     # Clicks the cart icon and moves to cart.html
+    #     inventorypage.click_cart_icon()       
+    #     assert self.driver.current_url == "https://www.saucedemo.com/cart.html"
+    #     print(f"\nTest 3:\nCurrent url: {self.driver.current_url}")
+
+    def test_items_on_cartpage(self):
+        
         login = system.page.LogInPage(self.driver)
         login.input_username()
         login.input_password()
         login.login_button()
         
         inventorypage = system.page.InventoryPage(self.driver)
+            
         inventorypage.add_to_cart_by_name("Sauce Labs Backpack")
-        #inventorypage.add_to_cart_by_price("$29.99")
-
         inventorypage.add_to_cart_by_name("Sauce Labs Onesie")
-        #inventorypage.add_to_cart_by_price("$7.99")
+        
         inventorypage.check_cart_has_item()
-
-        inventorypage.click_cart_icon()       
-        assert self.driver.current_url == "https://www.saucedemo.com/cart.html"
-        print(self.driver.current_url)
+        inventorypage.click_cart_icon()
+      
+        cartpage = system.page.CartPage(self.driver)
+        print(f"\nPage: {self.driver.current_url}")
+        
+        cartpage.check_cart("Sauce Labs Backpack")
+        cartpage.check_cart("Sauce Labs Onesie")
 
 
     def tearDown(self):

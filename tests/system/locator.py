@@ -6,13 +6,17 @@ class LogInPageLocators(object):
     LOGIN_BUTTON = ( By.ID, "login-button")
 
 class InventoryPageLocators(object):
-    ITEM_BLOCK = (By.CLASS_NAME, "inventory_item")
+    
     ITEM_NAME = (By.CLASS_NAME, "inventory_item_name")
 
     ITEMPRICE = (By.CLASS_NAME, "inventory_item_price")
-    ADD_TO_CART_BUTTON = (By.XPATH, "//button[@class='btn_primary btn_inventory']")
+    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "button[class='btn_primary btn_inventory']")
+    # ADD_TO_CART_BUTTON = (By.XPATH, "//button[@class='btn_primary btn_inventory']")
+    #ADD_TO_CART_BUTTON = (By.CLASS_NAME, "btn_primary btn_inventory")
     
     SHOPPING_CART= (By.CLASS_NAME, "shopping_cart_container")
     SHOPPING_CART_WITH_ITEM = (By.XPATH, '//*[@id="shopping_cart_container"]/a/span')
 
+class CartPageLocators(object):
+    ITEMNAME = (By.XPATH, '//*[@id="item_4_title_link"]/div')
     
